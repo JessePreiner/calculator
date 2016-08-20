@@ -19,6 +19,10 @@
 	  squares.forEach(square => {
       form.appendChild(square);
     });
+
+    let btnBuildReset = document.getElementById('buildReset');
+    btnBuildReset.onclick=resetForm;
+    btnBuildReset.innerHTML = 'Reset';
   }
 
 	let buildSquares = function(numSquares) {
@@ -43,14 +47,23 @@
   			label.setAttribute("for", lowerName);
   			label.innerHTML= `${name}: `;
 
-        let div = document.createElement('div');
-        div.innerHTML = `${label.outerHTML}${input.outerHTML}`;
-  			results.push(div);
+        let result = document.createElement('div');
+        result.innerHTML = `${label.outerHTML}${input.outerHTML}`;
+  			results.push(result);
       }
 		}
     return results;
 	}
 
+  let resetForm = function() {
+    let frmSquares = document.getElementById('frmSquares');
+    frmSquares.innerHTML = '';
+
+    let btnBuildReset = document.getElementById('buildReset');
+    btnBuildReset.onclick=resetForm;
+    btnBuildReset.innerHTML = 'Build';
+    btnBuildReset.onclick = buildCalculator;
+  }
 </script>
 </head>
 
@@ -58,9 +71,9 @@
 <div id="mainContent">
 		<label for="numSquares">Number of squares</label>
 		<input id="numSquares" type="number" min="1" max="10" name="numSquares"/>
-		<button onclick="buildCalculator()">Build</button>
+		<button id="buildReset" onclick="buildCalculator()">Build</button>
 
-	<form id="frmSquares" >
+	<form id="frmSquares">
 	</form>
 </div>
 
