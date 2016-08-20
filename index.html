@@ -16,11 +16,9 @@
 		var numSquares = document.getElementById('numSquares').value;
 		var squares = buildSquares(numSquares);
     var form = document.getElementById("frmSquares");
-	  squares.forEach(x => {
-      form.appendChild(x.label);
-      form.appendChild(x.input);
+	  squares.forEach(square => {
+      form.appendChild(square);
     });
-
   }
 
 	var buildSquares = function(numSquares) {
@@ -35,12 +33,9 @@
 			var input = document.createElement("input");
 			input.setAttribute("type", "number");
 			input.setAttribute("name", "square"+i);
-
-      var result = {
-        label:label,
-        input:input
-      };
-			results.push(result);
+      var div = document.createElement('div');
+      div.innerHTML = `${input.outerHTML}${label.outerHTML}`;
+			results.push(div);
 		}
     return results;
 	}
