@@ -28,11 +28,11 @@
         let name = `${dimensions[j]}`;
         let lowerName = name.toLowerCase();
 
-        input.setAttribute("name", lowerName);
+        input.setAttribute("name", `${lowerName}${i}`);
         input.setAttribute("id", `${lowerName}${i}`)
 
         let label = document.createElement("label");
-        label.setAttribute("for", lowerName);
+        label.setAttribute("for", `${lowerName}${i}`);
         label.innerHTML= `${name}: `;
 
         let result = document.createElement('div');
