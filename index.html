@@ -52,8 +52,16 @@
   			results.push(result);
       }
 		}
+    let btnCalculate = document.createElement('button');
+    btnCalculate.onclick = calculateResults;
+    btnCalculate.innerHTML = "Calculate";
+    results.push(btnCalculate);
     return results;
 	}
+
+  let calculateResults = function () {
+    alert('calculating!');
+  }
 
   let resetForm = function() {
     let frmSquares = document.getElementById('frmSquares');
@@ -64,6 +72,7 @@
     btnBuildReset.innerHTML = 'Build';
     btnBuildReset.onclick = buildCalculator;
   }
+
 </script>
 </head>
 
@@ -73,8 +82,8 @@
 		<input id="numSquares" type="number" min="1" max="10" name="numSquares"/>
 		<button id="buildReset" onclick="buildCalculator()">Build</button>
 
-	<form id="frmSquares">
-	</form>
+	<div id="frmSquares">
+	</div>
 </div>
 
 
