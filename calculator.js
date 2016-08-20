@@ -1,9 +1,7 @@
 (function () {
 
   let buildCalculator = function() {
-    let btnBuildReset = document.getElementById('buildReset');
-    btnBuildReset.onclick=resetForm;
-    btnBuildReset.innerHTML = 'Reset';
+    updateButton('buildReset', 'Reset', resetForm);
 
     let numSquares = document.getElementById('numSquares').value;
     let squares = buildSquares(numSquares);
@@ -40,6 +38,7 @@
         results.push(result);
       }
     }
+
     let btnCalculate = document.createElement('button');
     btnCalculate.onclick = calculateResults;
     btnCalculate.innerHTML = "Calculate";
@@ -51,20 +50,20 @@
     alert('calculating!');
   }
 
+  let updateButton = function(buttonId, innerHtml, fnOnClick) {
+    let btnBuildReset = document.getElementById(buttonId);
+    btnBuildReset.onclick=fnOnClick;
+    btnBuildReset.innerHTML = innerHtml;
+  }
+
   let resetForm = function() {
     let frmSquares = document.getElementById('frmSquares');
     frmSquares.innerHTML = '';
 
-    let btnBuildReset = document.getElementById('buildReset');
-    btnBuildReset.onclick=resetForm;
-    btnBuildReset.innerHTML = 'Build';
-    btnBuildReset.onclick = buildCalculator;
+    updateButton('buildReset', 'Build', buildCalculator);
   }
 
-  let btnBuildReset = document.getElementById('buildReset');
-  btnBuildReset.onclick=buildCalculator;
-  btnBuildReset.innerHTML = 'Build';
-
+  updateButton('buildReset', 'Build', buildCalculator);
 }
 
 
