@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<!-- HTML5 Hello world by kirupa - http://www.kirupa.com/html5/getting_your_feet_wet_html5_pg1.htm -->
 <html lang="en-us">
-
 <head>
-<meta charset="utf-8">
-<title>Calculator</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-shim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-sham.min.js"></script>
-<script src="https://wzrd.in/standalone/es7-shim@latest"></script>
-
+  <meta charset="utf-8">
+  <title>Calculator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-shim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.34.2/es6-sham.min.js"></script>
+  <script src="https://wzrd.in/standalone/es7-shim@latest"></script>
 </head>
 
 <body>
@@ -24,79 +21,7 @@
 	</div>
 </div>
 
-<script>
-	(function () {
-    let buildCalculator = function() {
-      let btnBuildReset = document.getElementById('buildReset');
-      btnBuildReset.onclick=resetForm;
-      btnBuildReset.innerHTML = 'Reset';
-
-  		let numSquares = document.getElementById('numSquares').value;
-  		let squares = buildSquares(numSquares);
-      let form = document.getElementById("frmSquares");
-  	  squares.forEach(square => {
-        form.appendChild(square);
-      });
-    }
-
-  	let buildSquares = function(numSquares) {
-  		if (!numSquares || numSquares < 1) {return 1;}
-  		let results = [];
-  		for (let i=1; i <= numSquares; i++) {
-        let dimensions = ['Length', 'Height', 'Width'];
-        let label = document.createElement("p");
-        label.innerHTML= `Volume ${i}`;
-        results.push(label);
-
-        for (let j=0; j<3; j++) {
-
-          let input = document.createElement("input");
-          let name = `${dimensions[j]}`;
-          let lowerName = name.toLowerCase();
-
-          input.setAttribute("name", lowerName);
-          input.setAttribute("id", `${name}${i}`)
-
-          let label = document.createElement("label");
-    			label.setAttribute("for", lowerName);
-    			label.innerHTML= `${name}: `;
-
-          let result = document.createElement('div');
-          result.innerHTML = `${label.outerHTML}${input.outerHTML}`;
-    			results.push(result);
-        }
-  		}
-      let btnCalculate = document.createElement('button');
-      btnCalculate.onclick = calculateResults;
-      btnCalculate.innerHTML = "Calculate";
-      results.push(btnCalculate);
-      return results;
-  	}
-
-    let calculateResults = function () {
-      alert('calculating!');
-    }
-
-    let resetForm = function() {
-      let frmSquares = document.getElementById('frmSquares');
-      frmSquares.innerHTML = '';
-
-      let btnBuildReset = document.getElementById('buildReset');
-      btnBuildReset.onclick=resetForm;
-      btnBuildReset.innerHTML = 'Build';
-      btnBuildReset.onclick = buildCalculator;
-    }
-
-    let btnBuildReset = document.getElementById('buildReset');
-    btnBuildReset.onclick=buildCalculator;
-    btnBuildReset.innerHTML = 'Build';
-
-  }
-
-
-)();
-
-</script>
+<script async src="calculator.js"></script>
 
 </body>
 </html>
