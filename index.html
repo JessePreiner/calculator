@@ -13,29 +13,40 @@
 <script src="https://wzrd.in/standalone/es7-shim@latest"></script>
 <script>
 	function buildCalculator() {
-		var numSquares = document.getElementById('numSquares').value;
-		var squares = buildSquares(numSquares);
-    var form = document.getElementById("frmSquares");
+		let numSquares = document.getElementById('numSquares').value;
+		let squares = buildSquares(numSquares);
+    let form = document.getElementById("frmSquares");
 	  squares.forEach(square => {
       form.appendChild(square);
     });
   }
 
-	var buildSquares = function(numSquares) {
+	let buildSquares = function(numSquares) {
 		if (!numSquares || numSquares < 1) {return 1;}
-		var results = [];
-		for (var i=0; i <numSquares; i++) {
+		let results = [];
+		for (let i=1; i <= numSquares; i++) {
+      let dimensions = ['Length', 'Height', 'Width'];
+      let label = document.createElement("p");
+      label.innerHTML= `Volume ${i}`;
+      results.push(label);
 
-			var label = document.createElement("label");
-			label.setAttribute("for", "square"+i);
-			label.innerHTML= `Square ${i}: `;
+      for (let j=0; j<3; j++) {
 
-			var input = document.createElement("input");
-			input.setAttribute("type", "number");
-			input.setAttribute("name", "square"+i);
-      var div = document.createElement('div');
-      div.innerHTML = `${input.outerHTML}${label.outerHTML}`;
-			results.push(div);
+        let input = document.createElement("input");
+        let name = `${dimensions[j]}`;
+        let lowerName = name.toLowerCase();
+
+        input.setAttribute("name", lowerName);
+        input.setAttribute("id", `${name}${i}`)
+
+        let label = document.createElement("label");
+  			label.setAttribute("for", lowerName);
+  			label.innerHTML= `${name}: `;
+
+        let div = document.createElement('div');
+        div.innerHTML = `${label.outerHTML}${input.outerHTML}`;
+  			results.push(div);
+      }
 		}
     return results;
 	}
