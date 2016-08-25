@@ -1,0 +1,80 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <title>Calculator</title>
+  <style>
+  * {
+    margin: 0;
+    padding: 0.2rem;
+  }
+
+  .area-wrap {
+    max-width: 777px;
+    margin: 0 auto;
+  }
+
+  .area {
+    background: #ccc;
+    margin-top: 2rem;
+  }
+
+  .area-list,
+  .area-header,
+  .area-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .area-list li {
+    list-style-type: none;
+    width: 100%;
+  }
+
+  .area-list label {
+    display: block;
+  }
+
+  .area-list-desc {
+    align-self: flex-end;
+    flex-shrink: 2;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="page-calculator">
+    <div class="area-wrap">
+
+<!-- moved to template file -->
+      <!--
+      # NEW AREA'S GOES HERE
+      # Should be all of #area-item-1
+      # -->
+
+      <div class="area-actions">
+        <div class="area-add">
+          <button onclick="getArea()"><span>+</span> Add another area</a>
+        </div>
+        <div class="area-calculate">
+          <button><span>=</span> Calculate</a>
+        </div>
+      </div> <!-- .area-actions -->
+
+      <div class="area-all-totals">
+        <p>Total: <span id="area-number-all">77 Yards</span></p>
+      </div> <!-- .area-all-totals -->
+
+    </div> <!-- .area-wrap -->
+  </div>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+
+</script>
+<script src="calculator.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+
+<script id="some-template" type="text/x-handlebars-template">
+  <div id="area-item-1" class="area">
+    <div class="area-header">
+      <h2>Area {{index}}</h2>
+      <a href="#0" class="area-remove">X</a>
+    </div>
+
+    <form class="area-form">
+      <fieldset id="area-ft">
+        <ul class="area-ft-list area-list">
+          <li class="area-list-desc">
+            <p>Ft.</p>
+          </li>
+          <li>
+            <label for="ft-length-{{index}}">Length</label>
+            <input id="ft-length" name="ft-length-{{index}}" />
+          </li>
+          <li>
+            <label for="ft-width-{{index}}">Width</label>
+            <input id="ft-width" name="ft-width-{{index}}" />
+          </li>
+          <li>
+            <label for="ft-depth-{{index}}">Depth</label>
+            <input id="ft-depth" name="ft-depth-{{index}}" />
+          </li>
+        </ul>
+      </fieldset>
+
+      <fieldset id="area-in">
+        <ul class="area-in-list area-list">
+          <li class="area-list-desc">
+            <p>In.</p>
+          </li>
+          <li>
+            <input id="in-length" name="in-length-{{index}}" />
+          </li>
+          <li>
+            <input id="in-width" name="in-width-{{index}}" />
+          </li>
+          <li>
+            <input id="in-depth" name="in-depth-{{index}}" />
+          </li>
+        </ul>
+      </fieldset>
+    </form>
+
+    <div class="area-total">
+      <p>Area total: <span id="area-number">0</span></p>
+    </div>
+  </div> <!-- #area-item-1 -->
+</script>

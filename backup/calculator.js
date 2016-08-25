@@ -74,8 +74,8 @@
 
   let resetForm = function() {
     updateButton('buildReset', 'Build', buildCalculator);
-    let frmSquares = document.getElementById('frmSquares');
     frmSquares.innerHTML = '';
+    let frmSquares = document.getElementsByClassName('frmSquares');
   }
   updateButton('buildReset', 'Build', buildCalculator);
 }
