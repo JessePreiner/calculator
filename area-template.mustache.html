@@ -1,6 +1,6 @@
 
 <script id="some-template" type="text/x-handlebars-template">
-  <div id="area-item-1" class="area">
+  <div id="area-item-{{index}}" class="area">
     <div class="area-header">
       <h2>Area {{index}}</h2>
       <a href="#0" class="area-remove">X</a>
@@ -48,5 +48,5 @@
     <div class="area-total">
       <p>Area total: <span id="area-number">0</span></p>
     </div>
-  </div> <!-- #area-item-1 -->
+  </div> <!-- #area-item-{{index}} -->
 </script>

@@ -17,13 +17,13 @@ $(document).ready(function() {
   const addArea = () => {
     $.get('./area-template.mustache.html', (x)=>{
       let areaModel = {};
-      let idx = areaWrap.children('div.area').length+1;
-      areaModel.index = idx;
+      let numberOfAreas = areaWrap.find('.area').length;
+      areaModel.index = numberOfAreas+1;
       let source = $(x).html();
       let template = Handlebars.compile(source);
-      $('.area-wrap').eq(0).append(template(areaModel));
+      $('#area-list').append(template(areaModel));
     })
   }
   setupButtons(actions);
-
+  addArea();
 });
