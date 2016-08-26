@@ -8,8 +8,9 @@ $(document).ready(function() {
     let areas = $('.area');
 
     areas.each((idx, area)=> {
-      let jArea = $.makeArray($(area));
-      let values = jArea.map((area) => {
+      let jqArea = $(area);
+      let areaArray = $.makeArray(jqArea);
+      let values = areaArray.map((area) => {
         let length = $(area).find('.input-length');
         let width = $(area).find('.input-width');
         let depth = $(area).find('.input-depth');
@@ -19,6 +20,7 @@ $(document).ready(function() {
           'depth': parseInt( depth.eq(0).val() ) * 12 + parseInt(depth.eq(1).val())
         }
         result.total = result.length * result.width * result.depth;
+        $(`#area-number-${idx+1}`).html(result.total);
         return result;
       });
 
