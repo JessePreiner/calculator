@@ -9,27 +9,20 @@ $(document).ready(function() {
 
     areas.each((idx, area)=> {
       let jArea = $.makeArray($(area));
-      let test = jArea.map((area) => {
+      let values = jArea.map((area) => {
         let length = $(area).find('.input-length');
         let width = $(area).find('.input-width');
         let depth = $(area).find('.input-depth');
-        return {
-          'length': {
-            'ft': length.eq(0).val(),
-            'in': length.eq(1).val(),
-          },
-          'width':  {
-            'ft': width.eq(0).val(),
-            'in': width.eq(1).val(),
-          },
-          'depth':  {
-            'ft': depth.eq(0).val(),
-            'in': depth.eq(1).val(),
-          }
+        let result = {
+          'length': parseInt( length.eq(0).val() ) * 12 + parseInt(length.eq(1).val()),
+          'width': parseInt( width.eq(0).val() ) * 12 + parseInt(width.eq(1).val()),
+          'depth': parseInt( depth.eq(0).val() ) * 12 + parseInt(depth.eq(1).val())
         }
+        result.total = result.length * result.width * result.depth;
+        return result;
       });
 
-      console.log(test);
+      console.log(values);
 
     });
   }
