@@ -9,23 +9,24 @@ $(document).ready(function() {
     areas.each((idx, area)=> {
       let jqArea = $(area);
       let areaArray = $.makeArray(jqArea);
-      let values = areaArray.map((area) => {
+      let values = areaArray.forEach((area) => {
         let length = $(area).find('.input-length');
         let width = $(area).find('.input-width');
         let depth = $(area).find('.input-depth');
-        let result = {
-          'length': (parseInt( length.eq(0).val() ) || 0 ) * 12 + (parseInt(length.eq(1).val() || 0 )),
-          'width':  (parseInt( width.eq(0).val() ) || 0) * 12 + (parseInt(width.eq(1).val() || 0 )),
-          'depth':  (parseInt( depth.eq(0).val() ) || 0 ) * 12 + (parseInt(depth.eq(1).val() || 0 ))
-        }
-        result.total = result.length * result.width * result.depth;
-        let convertedSingleAreaTotal = result.total * CUBIC_FEET_TO_CUBIC_YARD_CONVERSION_FACTOR;
+        lengthVal = convertStringValuesToInches(length.eq(0).val(), length.eq(1).val());
+        widthVal = convertStringValuesToInches(width.eq(0).val(), width.eq(1).val());
+        depthVal = convertStringValuesToInches(depth.eq(0).val(), depth.eq(1).val());
+        let areaTotal = lengthVal * widthVal * depthVal;
+        let convertedSingleAreaTotal = areaTotal * CUBIC_FEET_TO_CUBIC_YARD_CONVERSION_FACTOR;
         $(`#area-number-${idx+1}`).html(convertedSingleAreaTotal.toFixed(2));
         total += convertedSingleAreaTotal;
-        return result;
       });
       $('#area-number-all').html(total.toFixed(2));
     });
+  }
+
+  const convertStringValuesToInches = (feet, inches) => {
+    return (parseInt( feet ) || 0 ) * 12 + (parseInt(inches || 0 ));
   }
 
   const setupButtons = (actions) => {
