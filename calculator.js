@@ -1,9 +1,8 @@
 $(document).ready(function() {
   let areaWrap = $('.area-wrap');
   let actions = areaWrap.find('.area-actions');
-
+  const CUBIC_FEET_TO_CUBIC_YARD_CONVERSION_FACTOR = .0000214335;
   const calculate = () => {
-    // store each area separately
     let total = 0;
     let areas = $('.area');
 
@@ -15,17 +14,17 @@ $(document).ready(function() {
         let width = $(area).find('.input-width');
         let depth = $(area).find('.input-depth');
         let result = {
-          'length': parseInt( length.eq(0).val() ) * 12 + parseInt(length.eq(1).val()),
-          'width': parseInt( width.eq(0).val() ) * 12 + parseInt(width.eq(1).val()),
-          'depth': parseInt( depth.eq(0).val() ) * 12 + parseInt(depth.eq(1).val())
+          'length': (parseInt( length.eq(0).val() ) || 0 ) * 12 + (parseInt(length.eq(1).val() || 0 )),
+          'width':  (parseInt( width.eq(0).val() ) || 0) * 12 + (parseInt(width.eq(1).val() || 0 )),
+          'depth':  (parseInt( depth.eq(0).val() ) || 0 ) * 12 + (parseInt(depth.eq(1).val() || 0 ))
         }
         result.total = result.length * result.width * result.depth;
-        $(`#area-number-${idx+1}`).html(result.total);
+        let convertedSingleAreaTotal = result.total * CUBIC_FEET_TO_CUBIC_YARD_CONVERSION_FACTOR;
+        $(`#area-number-${idx+1}`).html(convertedSingleAreaTotal.toFixed(2));
+        total += convertedSingleAreaTotal;
         return result;
       });
-
-      console.log(values);
-
+      $('#area-number-all').html(total.toFixed(2));
     });
   }
 
