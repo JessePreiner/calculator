@@ -1,7 +1,8 @@
 $(document).ready(function() {
   let areaWrap = $('.area-wrap');
   let actions = areaWrap.find('.area-actions');
-  const CUBIC_FEET_TO_CUBIC_YARD_CONVERSION_FACTOR = .0000214335;
+  const CUBIC_INCH_TO_CUBIC_YARD = .0000214335;
+
   const calculate = () => {
     let total = 0;
     let areas = $('.area');
@@ -17,7 +18,7 @@ $(document).ready(function() {
         widthVal = convertStringValuesToInches(width.eq(0).val(), width.eq(1).val());
         depthVal = convertStringValuesToInches(depth.eq(0).val(), depth.eq(1).val());
         let areaTotal = lengthVal * widthVal * depthVal;
-        let convertedSingleAreaTotal = areaTotal * CUBIC_FEET_TO_CUBIC_YARD_CONVERSION_FACTOR;
+        let convertedSingleAreaTotal = areaTotal * CUBIC_INCH_TO_CUBIC_YARD;
         $(`#area-number-${idx+1}`).html(convertedSingleAreaTotal.toFixed(2));
         total += convertedSingleAreaTotal;
       });
@@ -47,6 +48,7 @@ $(document).ready(function() {
       $('#area-list').append(template(areaModel));
     })
   }
+
   setupButtons(actions);
   addArea();
 });
