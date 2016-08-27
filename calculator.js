@@ -3,6 +3,10 @@ $(document).ready(function() {
   let actions = areaWrap.find('.area-actions');
   const CUBIC_INCH_TO_CUBIC_YARD = .0000214335;
 
+  const removeArea = (event) => {
+    $(event.target).parents('.area').remove();
+  }
+
   const calculate = () => {
     let total = 0;
     let areas = $('.area');
@@ -22,8 +26,12 @@ $(document).ready(function() {
         $(`#area-number-${idx+1}`).html(convertedSingleAreaTotal.toFixed(2));
         total += convertedSingleAreaTotal;
       });
-      $('#area-number-all').html(total.toFixed(2));
+      updateTotal(total);
     });
+  }
+
+  const updateTotal = (newAmount) => {
+    $('#area-number-all').html(newAmount.toFixed(2));
   }
 
   const convertStringValuesToInches = (feet, inches) => {
@@ -42,10 +50,23 @@ $(document).ready(function() {
     $.get('./area-template.mustache.html', (x)=>{
       let areaModel = {};
       let numberOfAreas = areaWrap.find('.area').length;
-      areaModel.index = numberOfAreas+1;
+      let nextIndex =  parseInt(areaWrap
+          .find('.area')
+          .last()
+          .find('span.area-number')
+          .html()) || numberOfAreas;
+
+      areaModel.index = nextIndex+1;
       let source = $(x).html();
       let template = Handlebars.compile(source);
-      $('#area-list').append(template(areaModel));
+      let test = $('#area-list').append(template(areaModel));
+      if (numberOfAreas > 0) {
+        let currArea = $('.area').eq(nextIndex);
+        currArea.find('.area-header').append(`<a class="area-remove">X</a>`);
+        currArea.find('.area-remove').on('click', removeArea);
+
+
+      }
     })
   }
 
