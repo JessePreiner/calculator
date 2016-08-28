@@ -1,5 +1,7 @@
 $(document).ready(function() {
   let areaWrap = $('.area-wrap');
+  let total = 0;
+
   let actions = areaWrap.find('.area-actions');
   const CUBIC_INCH_TO_CUBIC_YARD = .0000214335;
 
@@ -7,30 +9,33 @@ $(document).ready(function() {
     $(event.target).parents('.area').remove();
   }
 
-  const calculate = () => {
-    let total = 0;
+  const calculateAndRenderAll = () => {
     let areas = $('.area');
-
-    areas.each((idx, area)=> {
-      let jqArea = $(area);
-      let areaArray = $.makeArray(jqArea);
-      let values = areaArray.forEach((area) => {
-        let length = $(area).find('.input-length');
-        let width = $(area).find('.input-width');
-        let depth = $(area).find('.input-depth');
-        lengthVal = convertStringValuesToInches(length.eq(0).val(), length.eq(1).val());
-        widthVal = convertStringValuesToInches(width.eq(0).val(), width.eq(1).val());
-        depthVal = convertStringValuesToInches(depth.eq(0).val(), depth.eq(1).val());
-        let areaTotal = lengthVal * widthVal * depthVal;
-        let convertedSingleAreaTotal = areaTotal * CUBIC_INCH_TO_CUBIC_YARD;
-        $(`#area-number-${idx+1}`).html(convertedSingleAreaTotal.toFixed(2));
-        total += convertedSingleAreaTotal;
-      });
-      updateTotal(total);
+    total = 0;
+    areas.each((idx,area) => {
+      let currTotal = calculateAreaTotal(area);
+      renderSingleAreaTotal(idx, currTotal);
+      total += currTotal;
     });
+    renderNewTotal(total);
   }
 
-  const updateTotal = (newAmount) => {
+  const renderSingleAreaTotal = (idx, amount) => {
+    $(`#area-number-${idx+1}`).html(amount.toFixed(2));
+  }
+
+  const calculateAreaTotal = (area) => {
+    let length = $(area).find('.input-length');
+    let width = $(area).find('.input-width');
+    let depth = $(area).find('.input-depth');
+    lengthVal = convertStringValuesToInches(length.eq(0).val(), length.eq(1).val());
+    widthVal = convertStringValuesToInches(width.eq(0).val(), width.eq(1).val());
+    depthVal = convertStringValuesToInches(depth.eq(0).val(), depth.eq(1).val());
+    let areaTotal = (lengthVal * widthVal * depthVal) * CUBIC_INCH_TO_CUBIC_YARD;
+    return areaTotal;
+  }
+
+  const renderNewTotal = (newAmount) => {
     $('#area-number-all').html(newAmount.toFixed(2));
   }
 
@@ -43,31 +48,28 @@ $(document).ready(function() {
     let btnCalculate = actions.find('.area-calculate').find('button');
 
     btnAddArea.on('click', addArea);
-    btnCalculate.on('click', calculate);
+    btnCalculate.on('click', calculateAndRenderAll);
   }
 
   const addArea = () => {
-    $.get('./area-template.mustache.html', (x)=>{
+    $.get('./area-template.mustache.html', (templateContents) => {
       let areaModel = {};
       let numberOfAreas = areaWrap.find('.area').length;
-      let nextIndex =  parseInt(areaWrap
+      let nextIndex =  (parseInt(areaWrap
           .find('.area')
           .last()
           .find('span.area-number')
-          .html()) || numberOfAreas;
+          .html()) || numberOfAreas)+1;
 
-      areaModel.index = nextIndex+1;
-      let source = $(x).html();
+      let source = $(templateContents).html();
       let template = Handlebars.compile(source);
-      let test = $('#area-list').append(template(areaModel));
+      $('#area-list').append(template({index: nextIndex}));
       if (numberOfAreas > 0) {
-        let currArea = $('.area').eq(nextIndex);
+        let currArea = $('.area').eq(numberOfAreas);
         currArea.find('.area-header').append(`<a class="area-remove">X</a>`);
         currArea.find('.area-remove').on('click', removeArea);
-
-
       }
-    })
+    });
   }
 
   setupButtons(actions);
