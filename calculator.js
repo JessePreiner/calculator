@@ -7,6 +7,7 @@ $(document).ready(function() {
 
   const removeArea = (event) => {
     $(event.target).parents('.area').remove();
+    calculateAndRenderAll();
   }
 
   const calculateAndRenderAll = () => {
