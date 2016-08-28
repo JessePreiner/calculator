@@ -1,8 +1,4 @@
 $(document).ready(function() {
-  let areaWrap = $('.area-wrap');
-  let total = 0;
-
-  let actions = areaWrap.find('.area-actions');
   const CUBIC_INCH_TO_CUBIC_YARD = .0000214335;
 
   const removeArea = (event) => {
@@ -73,6 +69,9 @@ $(document).ready(function() {
     });
   }
 
+  let areaWrap = $('.area-wrap');
+  let actions = areaWrap.find('.area-actions');
+  let total = 0;
   setupButtons(actions);
   addArea();
 });
