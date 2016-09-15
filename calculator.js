@@ -50,7 +50,6 @@ $(document).ready(function() {
 
   const addArea = () => {
     $.get('./area-template.mustache.html', (templateContents) => {
-      let areaModel = {};
       let numberOfAreas = areaWrap.find('.area').length;
       let nextIndex =  (parseInt(areaWrap
           .find('.area')
