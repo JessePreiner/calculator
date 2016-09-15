@@ -49,7 +49,7 @@ $(document).ready(function() {
   }
 
   const addArea = () => {
-    $.get('./area-template.mustache.html', (templateContents) => {
+    $.get('./area-template.handlebars.html', (templateContents) => {
       let numberOfAreas = areaWrap.find('.area').length;
       let nextIndex =  (parseInt(areaWrap
           .find('.area')
